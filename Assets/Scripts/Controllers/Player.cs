@@ -49,8 +49,6 @@ public class Player : MonoBehaviour
         float rotationByPoints = 360/circlePoints;
         for(int i = 1; i < circlePoints; i++)
         {
-             
-            Debug.Log(i);
             Debug.DrawLine(transform.position - circleDraw(i, rotationByPoints) * radius, transform.position - circleDraw(i-1, rotationByPoints) * radius , detected);
         }
         Debug.DrawLine(transform.position - circleDraw(0, rotationByPoints) * radius, transform.position - circleDraw(circlePoints - 1, rotationByPoints) * radius, detected);
