@@ -8,16 +8,33 @@ public class Player : MonoBehaviour
     public List<Transform> asteroidTransforms;
     public Transform enemyTransform;
     public GameObject bombPrefab;
+    public GameObject powerupPrefab;
     public Transform bombsTransform;
 
     public float radius = 2f;
+    public float radiusPowerup = 3f;
     public int circlePoints = 9;
+    public int numberOfPowerups = 3;
     public Color detected = Color.green;
 
     void Update()
     {
 
         EnemyRadar(radius, circlePoints);
+
+        if( Input.GetKeyDown(KeyCode.Space))
+        {
+            SpawnPowerups(radiusPowerup, numberOfPowerups);
+        }     
+    }
+
+    public void SpawnPowerups(float radius, int numberOfPowerups)
+    {
+        float powerupByPoints = 360 / numberOfPowerups;
+        for (int i = 0; i < numberOfPowerups; i++)
+        {
+            Instantiate(powerupPrefab, transform.position - circleDraw(i, powerupByPoints) * radius, Quaternion.identity);
+        }
     }
 
     public void EnemyRadar(float radius, int circlePoints)
