@@ -7,6 +7,7 @@ public class Moon : MonoBehaviour
     public Transform planetTransform;
     public float radius = 2f;
     public float speed = 10f;
+    public float angle = 0f;
 
     private void Update()
     {
@@ -15,10 +16,17 @@ public class Moon : MonoBehaviour
 
     public void OrbitalMotion(float radius, float speed, Transform target)
     {
-        /*float angle = Mathf.Atan2(target.position.x - transform.position.x, target.position.y - transform.position.y);
-        Debug.Log(angle * Mathf.Rad2Deg);
-        transform.position = transform.position + new Vector3(Mathf.Cos(speed), Mathf.Sin(speed), 0) * Time.deltaTime;*/
-        float angle =+ speed;
-        transform.position = transform.position + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0f) * Time.deltaTime;
+        angle += speed;
+
+        if (angle> 360)
+        {
+            angle -= 360;
+        }
+        transform.position = target.position - circleMove(angle) * radius;
+    }
+    public Vector3 circleMove(float rotatePoint)
+    {
+        return new Vector3(Mathf.Cos(rotatePoint * Mathf.Deg2Rad), Mathf.Sin(rotatePoint * Mathf.Deg2Rad), 0);
     }
 }
+
